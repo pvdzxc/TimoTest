@@ -5,7 +5,7 @@ import re
 # Set up logging
 import logging
 logging.basicConfig(
-    filename='../logs/data_quality_log.txt',
+    filename='/home/TimoTest/logs/data_quality_log.txt',
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'

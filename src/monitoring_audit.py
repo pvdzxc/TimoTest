@@ -3,7 +3,7 @@ import logging
 
 # Set up logging
 logging.basicConfig(
-    filename='/home/timobank/logs/risk_audit_log.txt',
+    filename='/home/TimoTest/logs/risk_audit_log.txt',
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
