@@ -6,7 +6,7 @@ try:
         host="localhost",
         database="postgres",
         user="postgres",
-        password="pvdzxc2003",
+        password="123456789",
         port=5432
     )
     cursor = connection.cursor()

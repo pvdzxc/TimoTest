@@ -3,7 +3,7 @@ import logging
 
 # Set up logging
 logging.basicConfig(
-    filename='/home/TimoTest/logs/risk_audit_log.txt',
+    filename='/home/timobank/TimoTest/logs/risk_audit_log.txt',
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
@@ -17,7 +17,7 @@ def main():
             host="localhost",
             database="postgres",
             user="postgres",
-            password="pvdzxc2003",
+            password="123456789",
             port=5432
         )
         cursor = connection.cursor()

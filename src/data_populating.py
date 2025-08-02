@@ -17,7 +17,7 @@ def main():
             host="localhost",
             database="postgres",
             user="postgres",
-            password="pvdzxc2003",
+            password="123456789",
             port=5432
         )
         cursor = connection.cursor()
@@ -26,7 +26,7 @@ def main():
         #debug
         base_dir = os.path.dirname(os.path.abspath(__file__))[:-3] + 'data'
         # Insert customers
-        customer_csv = os.path.join(base_dir, 'cleaned__sample_customer.csv')
+        customer_csv = os.path.join(base_dir, '/home/timobank/TimoTest/data/cleaned__sample_customer.csv')
         customer_columns = [
             'customer_id', 'first_name', 'last_name', 'phone_number',
             'username', 'email_address', 'national_id', 'dob', 'address'
@@ -62,7 +62,7 @@ def main():
                     # connection.rollback()
             print(f"Customers inserted successfully. Total: {reader.line_num} rows.")
         # Insert accounts
-        account_csv = os.path.join(base_dir, 'cleaned__sample_account.csv')
+        account_csv = os.path.join(base_dir, '/home/timobank/TimoTest/data/cleaned__sample_account.csv')
         account_columns = [
             'account_id', 'customer_id', 'account_number', 'account_balance',
             'account_open_date', 'account_status', 'account_type'
@@ -94,7 +94,7 @@ def main():
             print(f"Accounts inserted successfully. Total: {reader.line_num} rows.")
             
         # Insert devices
-        device_csv = os.path.join(base_dir, 'cleaned__sample_device.csv')
+        device_csv = os.path.join(base_dir, '/home/timobank/TimoTest/data/cleaned__sample_device.csv')
         device_columns = [
             'device_id', 'customer_id', 'device_name', 'device_model',
             'ip_address', 'is_verified'
@@ -123,7 +123,7 @@ def main():
                     print(f"Error inserting Device {row['device_id']}: {e}")
             print(f"Devices inserted successfully. Total: {reader.line_num} rows.")
         # Insert auth logs
-        auth_csv = os.path.join(base_dir, 'cleaned__sample_auth_log.csv')
+        auth_csv = os.path.join(base_dir, '/home/timobank/TimoTest/data/cleaned__sample_auth_log.csv')
         auth_columns = [
             'auth_id', 'device_id', 'customer_id', 'auth_method', 'auth_time'
         ]
@@ -150,7 +150,7 @@ def main():
             print(f"Auth logs inserted successfully. Total: {reader.line_num} rows.")
 
         # Insert transactions
-        transaction_csv = os.path.join(base_dir, 'cleaned__sample_transaction.csv')
+        transaction_csv = os.path.join(base_dir, '/home/timobank/TimoTest/data/cleaned__sample_transaction.csv')
         transaction_columns = [
             'transaction_id', 'account_id', 'amount', 'transaction_time', 'auth_id'
         ]

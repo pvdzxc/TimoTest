@@ -1,8 +1,9 @@
-2025-08-02 14:17:58,293 WARNING: Risk detected on transaction 1: Amount 13564662.12 VND used weak auth (Password) for customer 5.
-2025-08-02 14:17:58,294 WARNING: Risk detected on transaction 36: Amount 16173077.11 VND used weak auth (PIN) for customer 5.
-2025-08-02 14:17:58,294 WARNING: Risk detected on transaction 53: Amount 13400475.02 VND used weak auth (Password) for customer 5.
-2025-08-02 14:17:58,295 WARNING: Device 2 for customer 1 is unverified.
-2025-08-02 14:17:58,295 WARNING: Device 3 for customer 2 is unverified.
-2025-08-02 14:17:58,295 WARNING: Device 6 for customer 5 is unverified.
-2025-08-02 14:17:58,295 WARNING: Device 9 for customer 8 is unverified.
-2025-08-02 14:17:58,295 WARNING: Device 10 for customer 9 is unverified.
+2025-08-02 16:28:43,570 WARNING: Risk detected on transaction 5: Amount 18912173.37 VND used weak auth (PIN) for customer 1.
+2025-08-02 16:28:43,571 WARNING: Risk detected on transaction 15: Amount 11775630.73 VND used weak auth (Password) for customer 3.
+2025-08-02 16:28:43,571 WARNING: Risk detected on transaction 69: Amount 15380452.85 VND used weak auth (PIN) for customer 3.
+2025-08-02 16:28:43,573 WARNING: Device 2 for customer 1 is unverified.
+2025-08-02 16:28:43,573 WARNING: Device 3 for customer 2 is unverified.
+2025-08-02 16:28:43,573 WARNING: Device 5 for customer 4 is unverified.
+2025-08-02 16:28:43,573 WARNING: Device 6 for customer 5 is unverified.
+2025-08-02 16:28:43,573 WARNING: Device 7 for customer 6 is unverified.
+2025-08-02 16:28:43,573 WARNING: Device 8 for customer 7 is unverified.

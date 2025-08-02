@@ -10,7 +10,7 @@ try:
         host="localhost",
         database="postgres",
         user="postgres",
-        password="pvdzxc2003",
+        password="123456789",
         port=5432
     )
     cursor = connection.cursor()
@@ -170,24 +170,24 @@ if __name__ == "__main__":
     devices = create_devices(customers)
     txns,auth = create_transactions(accounts, devices,customers)
 
-    with open('../data/sample_customer.csv', 'w') as f:
+    with open('/home/timobank/TimoTest/data/sample_customer.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=customers[0].keys())
         writer.writeheader()
         writer.writerows(customers)
 
-    with open('../data/sample_transaction.csv', 'w') as f:
+    with open('/home/timobank/TimoTest/data/sample_transaction.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=txns[0].keys())
         writer.writeheader()
         writer.writerows(txns)
-    with open('../data/sample_device.csv', 'w') as f:
+    with open('/home/timobank/TimoTest/data/sample_device.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=devices[0].keys())
         writer.writeheader()
         writer.writerows(devices)
-    with open('../data/sample_account.csv', 'w') as f:
+    with open('/home/timobank/TimoTest/data/sample_account.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=accounts[0].keys())
         writer.writeheader()
         writer.writerows(accounts)
-    with open('../data/sample_auth.csv', 'w') as f:
+    with open('/home/timobank/TimoTest/data/sample_auth.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=auth[0].keys())
         writer.writeheader()
         writer.writerows(auth)
