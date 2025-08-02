@@ -24,9 +24,7 @@ def main():
         cursor.execute("SET search_path TO public;")
 
         #debug
-        print(os.path.dirname(os.path.abspath(__file__))[:-3])
         base_dir = os.path.dirname(os.path.abspath(__file__))[:-3] + 'data'
-        print(os.path.join(base_dir, 'cleaned__sample_customer.csv'))
         # Insert customers
         customer_csv = os.path.join(base_dir, 'cleaned__sample_customer.csv')
         customer_columns = [
