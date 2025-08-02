@@ -1,0 +1,86 @@
+2025-08-02 09:55:40,803 INFO: [Missing Values Check] Customers
+2025-08-02 09:55:40,811 INFO: Cleaned Customers by removing rows with missing national_id.
+2025-08-02 09:55:40,814 INFO: Cleaned Customers by removing rows with missing first_name.
+2025-08-02 09:55:40,814 INFO: Cleaned Customers by removing rows with missing last_name.
+2025-08-02 09:55:40,814 INFO: [Missing Values Check] Transactions
+2025-08-02 09:55:40,814 INFO: Cleaned Transactions by removing rows with missing transaction_id.
+2025-08-02 09:55:40,814 INFO: Cleaned Transactions by removing rows with missing amount.
+2025-08-02 09:55:40,814 INFO: Cleaned Transactions by removing rows with missing account_id.
+2025-08-02 09:55:40,814 INFO: Cleaned Transactions by removing rows with missing auth_id.
+2025-08-02 09:55:40,814 INFO: [Missing Values Check] Devices
+2025-08-02 09:55:40,814 INFO: Cleaned Devices by removing rows with missing device_id.
+2025-08-02 09:55:40,814 INFO: Cleaned Devices by removing rows with missing customer_id.
+2025-08-02 09:55:40,822 INFO: Cleaned Devices by removing rows with missing device_name.
+2025-08-02 09:55:40,822 INFO: Cleaned Devices by removing rows with missing device_model.
+2025-08-02 09:55:40,822 INFO: [Missing Values Check] Accounts
+2025-08-02 09:55:40,822 INFO: Cleaned Accounts by removing rows with missing account_id.
+2025-08-02 09:55:40,822 INFO: Cleaned Accounts by removing rows with missing customer_id.
+2025-08-02 09:55:40,822 INFO: Cleaned Accounts by removing rows with missing account_number.
+2025-08-02 09:55:40,822 INFO: Cleaned Accounts by removing rows with missing account_open_date.
+2025-08-02 09:55:40,822 INFO: [Missing Values Check] Auth Logs
+2025-08-02 09:55:40,822 INFO: Cleaned Auth Logs by removing rows with missing auth_id.
+2025-08-02 09:55:40,822 INFO: Cleaned Auth Logs by removing rows with missing device_id.
+2025-08-02 09:55:40,822 INFO: Cleaned Auth Logs by removing rows with missing customer_id.
+2025-08-02 09:55:40,829 INFO: Cleaned Auth Logs by removing rows with missing auth_method.
+2025-08-02 09:55:40,829 INFO: Cleaned Auth Logs by removing rows with missing auth_time.
+2025-08-02 09:55:40,829 INFO: [Uniqueness Check]  ['national_id', 'phone_number', 'email_address']
+2025-08-02 09:55:40,829 INFO: All national_id values are unique.
+2025-08-02 09:55:40,829 INFO: All phone_number values are unique.
+2025-08-02 09:55:40,829 INFO: All email_address values are unique.
+2025-08-02 09:55:40,829 INFO: [Uniqueness Check]  ['transaction_id', 'auth_id']
+2025-08-02 09:55:40,829 INFO: All transaction_id values are unique.
+2025-08-02 09:55:40,829 INFO: All auth_id values are unique.
+2025-08-02 09:55:40,829 INFO: [Uniqueness Check]  ['device_id', 'customer_id']
+2025-08-02 09:55:40,829 INFO: All device_id values are unique.
+2025-08-02 09:55:40,829 INFO: All customer_id values are unique.
+2025-08-02 09:55:40,829 INFO: [Uniqueness Check]  [['account_id', 'customer_id']]
+2025-08-02 09:55:40,829 INFO: All (account_id, customer_id) pairs are unique.
+2025-08-02 09:55:40,839 INFO: [Format Check] National ID
+2025-08-02 09:55:40,839 INFO: All national_id values are properly formatted.
+2025-08-02 09:55:41,030 INFO: [Null Check] Customer
+2025-08-02 09:55:41,030 INFO: No NULLs in 'first_name'
+2025-08-02 09:55:41,030 INFO: No NULLs in 'last_name'
+2025-08-02 09:55:41,030 INFO: No NULLs in 'username'
+2025-08-02 09:55:41,030 INFO: No NULLs in 'email_address'
+2025-08-02 09:55:41,030 INFO: No NULLs in 'id_number'
+2025-08-02 09:55:41,030 INFO: [Null Check] BankAccount
+2025-08-02 09:55:41,040 INFO: No NULLs in 'customer_id'
+2025-08-02 09:55:41,040 INFO: No NULLs in 'account_number'
+2025-08-02 09:55:41,040 INFO: No NULLs in 'account_open_date'
+2025-08-02 09:55:41,040 INFO: [Null Check] Device
+2025-08-02 09:55:41,040 INFO: No NULLs in 'customer_id'
+2025-08-02 09:55:41,040 INFO: [Null Check] AuthenticationLog
+2025-08-02 09:55:41,040 INFO: No NULLs in 'device_id'
+2025-08-02 09:55:41,040 INFO: No NULLs in 'customer_id'
+2025-08-02 09:55:41,040 INFO: No NULLs in 'auth_method'
+2025-08-02 09:55:41,048 INFO: No NULLs in 'auth_time'
+2025-08-02 09:55:41,048 INFO: [Null Check] TabTransaction
+2025-08-02 09:55:41,048 INFO: No NULLs in 'account_id'
+2025-08-02 09:55:41,048 INFO: No NULLs in 'amount'
+2025-08-02 09:55:41,048 INFO: No NULLs in 'transaction_time'
+2025-08-02 09:55:41,048 INFO: No NULLs in 'auth_id'
+2025-08-02 09:55:41,048 INFO: [Uniqueness Check] Customer
+2025-08-02 09:55:41,048 INFO: All values in '['username']' are unique
+2025-08-02 09:55:41,048 INFO: All values in '['email_address']' are unique
+2025-08-02 09:55:41,048 INFO: All values in '['id_number']' are unique
+2025-08-02 09:55:41,048 INFO: [Uniqueness Check] BankAccount
+2025-08-02 09:55:41,048 INFO: All values in '['account_id', 'customer_id']' are unique
+2025-08-02 09:55:41,048 INFO: All values in '['account_number']' are unique
+2025-08-02 09:55:41,048 INFO: [Uniqueness Check] Device
+2025-08-02 09:55:41,048 INFO: All values in '['device_id', 'customer_id']' are unique
+2025-08-02 09:55:41,048 INFO: [Uniqueness Check] AuthenticationLog
+2025-08-02 09:55:41,056 INFO: All values in '['auth_id', 'device_id', 'customer_id']' are unique
+2025-08-02 09:55:41,056 INFO: [Uniqueness Check] TabTransaction
+2025-08-02 09:55:41,056 INFO: All values in '['transaction_id', 'account_id', 'auth_id']' are unique
+2025-08-02 09:55:41,056 INFO: [Foreign Key Check] BankAccount.customer_id -> Customer.customer_id
+2025-08-02 09:55:41,056 INFO: All foreign keys in BankAccount.customer_id are valid
+2025-08-02 09:55:41,056 INFO: [Foreign Key Check] Device.customer_id -> Customer.customer_id
+2025-08-02 09:55:41,056 INFO: All foreign keys in Device.customer_id are valid
+2025-08-02 09:55:41,056 INFO: [Foreign Key Check] AuthenticationLog.device_id -> Device.device_id
+2025-08-02 09:55:41,056 INFO: All foreign keys in AuthenticationLog.device_id are valid
+2025-08-02 09:55:41,056 INFO: [Foreign Key Check] AuthenticationLog.customer_id -> Customer.customer_id
+2025-08-02 09:55:41,056 INFO: All foreign keys in AuthenticationLog.customer_id are valid
+2025-08-02 09:55:41,056 INFO: [Foreign Key Check] TabTransaction.account_id -> BankAccount.account_id
+2025-08-02 09:55:41,056 INFO: All foreign keys in TabTransaction.account_id are valid
+2025-08-02 09:55:41,056 INFO: [Foreign Key Check] TabTransaction.auth_id -> AuthenticationLog.auth_id
+2025-08-02 09:55:41,056 INFO: All foreign keys in TabTransaction.auth_id are valid
