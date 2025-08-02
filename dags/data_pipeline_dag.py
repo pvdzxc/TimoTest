@@ -20,22 +20,26 @@ with DAG(
 
     generate_data = BashOperator(
         task_id='generate_data',
-        bash_command='python f:/PvD/Studying/Programming/DataProcessing/TimoTest/src/generate_data.py'
+        bash_command='python ../src/generate_data.py'
+    )
+    data_quality_first = BashOperator(
+        task_id='data_quality_standards_first_run',
+        bash_command='python ../src/data_quality_standards.py'
     )
 
     data_populating = BashOperator(
         task_id='data_populating',
-        bash_command='python f:/PvD/Studying/Programming/DataProcessing/TimoTest/src/data_populating.py'
+        bash_command='python ../src/data_populating.py'
     )
 
-    data_quality = BashOperator(
-        task_id='data_quality_standards',
-        bash_command='python f:/PvD/Studying/Programming/DataProcessing/TimoTest/src/data_quality_standards.py'
+    data_quality_second = BashOperator(
+        task_id='data_quality_standards_second_run',
+        bash_command='python ../src/data_quality_standards.py'
     )
 
     monitoring_audit = BashOperator(
         task_id='monitoring_audit',
-        bash_command='python f:/PvD/Studying/Programming/DataProcessing/TimoTest/src/monitoring_audit.py'
+        bash_command='python ../src/monitoring_audit.py'
     )
 
-    generate_data >> data_populating >> data_quality >> monitoring_audit
+    generate_data >> data_quality_first >> data_populating >> data_quality_second >> monitoring_audit
