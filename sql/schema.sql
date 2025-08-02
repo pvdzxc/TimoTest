@@ -56,7 +56,6 @@ CREATE TABLE TabTransaction (
     account_id INT REFERENCES BankAccount(account_id),
     amount DECIMAL(18,2),
     transaction_time TIMESTAMP,
-    device_id INT REFERENCES Device(device_id),
     auth_id INT REFERENCES AuthenticationLog(auth_id),
     risk_tag VARCHAR(100)  -- e.g. strong_authentication, weak_authentication
 );

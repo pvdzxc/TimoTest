@@ -5,18 +5,18 @@ import re
 # Set up logging
 import logging
 logging.basicConfig(
-    filename='data_quality_log.txt',
+    filename='../logs/data_quality_log.txt',
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
 )
 
 # Load data sources
-customers = pd.read_csv('sample_customer.csv')
-transactions = pd.read_csv('sample_transaction.csv')
-accounts = pd.read_csv('sample_account.csv')
-devices = pd.read_csv('sample_device.csv')
-auth_logs = pd.read_csv('sample_auth.csv')
+customers = pd.read_csv('../data/sample_customer.csv')
+transactions = pd.read_csv('../data/sample_transaction.csv')
+accounts = pd.read_csv('../data/sample_account.csv')
+devices = pd.read_csv('../data/sample_device.csv')
+auth_logs = pd.read_csv('../data/sample_auth.csv')
 
 def check_source_missing(table, table_name, check_columns):
     logging.info(f"[Missing Values Check] {table_name}")
@@ -126,15 +126,15 @@ def main():
     clean_transactions = check_source_unique(clean_transactions, ['transaction_id', 'auth_id'], primary_key='transaction_id')
     clean_devices = check_source_unique(clean_devices, ['device_id', 'customer_id'])
     clean_accounts = check_source_unique(clean_accounts, [['account_id', 'customer_id']])
-    with open('cleaned__sample_customer.csv', 'w') as f:
+    with open('../data/cleaned__sample_customer.csv', 'w') as f:
         clean_customers.to_csv(f, index=False)
-    with open('cleaned__sample_transaction.csv', 'w') as f:
+    with open('../data/cleaned__sample_transaction.csv', 'w') as f:
         clean_transactions.to_csv(f, index=False)
-    with open('cleaned__sample_device.csv', 'w') as f:
+    with open('../data/cleaned__sample_device.csv', 'w') as f:
         clean_devices.to_csv(f, index=False)
-    with open('cleaned__sample_account.csv', 'w') as f:
+    with open('../data/cleaned__sample_account.csv', 'w') as f:
         clean_accounts.to_csv(f, index=False)
-    with open('cleaned__sample_auth_log.csv', 'w') as f:
+    with open('../data/cleaned__sample_auth_log.csv', 'w') as f:
         clean_auth_logs.to_csv(f, index=False)
     check_source_national_id_format(customers)
     try:
