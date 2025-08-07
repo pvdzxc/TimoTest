@@ -1,4 +1,15 @@
-SET SCHEMA 'public';
+import psycopg2
+
+# Define your database connection info here
+DB_CONFIG = {
+    "dbname": "airflow",
+    "user": "airflow",
+    "password": "airflow",
+    "host": "postgres",
+    "port": 5432
+}
+
+SQL_SCRIPT = """SET SCHEMA 'public';
 DROP TABLE IF EXISTS Customer CASCADE;
 DROP TABLE IF EXISTS BankAccount CASCADE;
 DROP TABLE IF EXISTS Device CASCADE;
@@ -59,3 +70,24 @@ CREATE TABLE TabTransaction (
     auth_id INT REFERENCES AuthenticationLog(auth_id),
     risk_tag VARCHAR(100)  -- e.g. strong_authentication, weak_authentication
 );
+
+
+"""
+
+def create_schema():
+    try:
+        # Connect to PostgreSQL
+        conn = psycopg2.connect(**DB_CONFIG)
+        cur = conn.cursor()
+
+        # Execute SQL script
+        cur.execute(SQL_SCRIPT)
+        print("Schema created successfully.")
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print("Failed to execute schema script:", e)
+
+if __name__ == "__main__":
+    create_schema()

@@ -14,19 +14,20 @@ import os
 def main():
     try:
         connection = psycopg2.connect(
-            host="localhost",
-            database="postgres",
-            user="postgres",
-            password="pvdzxc2003",
+            host="postgres",
+            database="airflow",
+            user="airflow",
+            password="airflow",
             port=5432
         )
         cursor = connection.cursor()
         cursor.execute("SET search_path TO public;")
 
         #debug
-        base_dir = os.path.dirname(os.path.abspath(__file__))[:-3] + 'data'
+        # base_dir = os.path.dirname(os.path.abspath(__file__))[:-3] + 'data'
+        base_dir = '/opt/airflow/data'
         # Insert customers
-        customer_csv = os.path.join(base_dir, 'cleaned__sample_customer.csv')
+        customer_csv = base_dir + '/cleaned__sample_customer.csv'
         customer_columns = [
             'customer_id', 'first_name', 'last_name', 'phone_number',
             'username', 'email_address', 'national_id', 'dob', 'address'
@@ -62,7 +63,8 @@ def main():
                     # connection.rollback()
             print(f"Customers inserted successfully. Total: {reader.line_num} rows.")
         # Insert accounts
-        account_csv = os.path.join(base_dir, 'cleaned__sample_account.csv')
+        account_csv = base_dir + '/cleaned__sample_account.csv'
+        # account_csv = os.path.join(base_dir, 'cleaned__sample_account.csv')
         account_columns = [
             'account_id', 'customer_id', 'account_number', 'account_balance',
             'account_open_date', 'account_status', 'account_type'
@@ -94,7 +96,8 @@ def main():
             print(f"Accounts inserted successfully. Total: {reader.line_num} rows.")
             
         # Insert devices
-        device_csv = os.path.join(base_dir, 'cleaned__sample_device.csv')
+        # device_csv = os.path.join(base_dir, 'cleaned__sample_device.csv')
+        device_csv = base_dir + '/cleaned__sample_device.csv'
         device_columns = [
             'device_id', 'customer_id', 'device_name', 'device_model',
             'ip_address', 'is_verified'
@@ -123,7 +126,8 @@ def main():
                     print(f"Error inserting Device {row['device_id']}: {e}")
             print(f"Devices inserted successfully. Total: {reader.line_num} rows.")
         # Insert auth logs
-        auth_csv = os.path.join(base_dir, 'cleaned__sample_auth_log.csv')
+        # auth_csv = os.path.join(base_dir, 'cleaned__sample_auth_log.csv')
+        auth_csv = base_dir + '/cleaned__sample_auth_log.csv'
         auth_columns = [
             'auth_id', 'device_id', 'customer_id', 'auth_method', 'auth_time'
         ]
@@ -150,18 +154,18 @@ def main():
             print(f"Auth logs inserted successfully. Total: {reader.line_num} rows.")
 
         # Insert transactions
-        transaction_csv = os.path.join(base_dir, 'cleaned__sample_transaction.csv')
+        # transaction_csv = os.path.join(base_dir, 'cleaned__sample_transaction.csv')
+        transaction_csv = base_dir + '/cleaned__sample_transaction.csv'
         transaction_columns = [
-            'transaction_id', 'account_id', 'amount', 'transaction_time', 'auth_id'
+            'account_id', 'amount', 'transaction_time', 'auth_id'
         ]
         transaction_db_columns = [
-            'transaction_id', 'account_id', 'amount', 'transaction_time', 'auth_id'
+            'account_id', 'amount', 'transaction_time', 'auth_id'
         ]
         with open(transaction_csv, mode='r', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 values = [
-                    row['transaction_id'],
                     row['account_id'],
                     row['amount'],
                     row['transaction_time'],
@@ -174,6 +178,7 @@ def main():
                     cursor.execute(query, values)
                 except psycopg2.IntegrityError as e:
                     print(f"Error inserting TabTransaction {row['transaction_id']}: {e}")
+            print(f"Transactions inserted successfully. Total: {reader.line_num} rows.")
         connection.commit()
         print("Data inserted successfully.")
 

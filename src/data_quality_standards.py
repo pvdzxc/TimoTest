@@ -5,29 +5,36 @@ import re
 # Set up logging
 import logging
 logging.basicConfig(
-    filename='/home/TimoTest/logs/data_quality_log.txt',
+    filename='/opt/airflow/logs/data_quality_log.txt',
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
 )
-
+basedir = '/opt/airflow/data'
 # Load data sources
-customers = pd.read_csv('sample_customer.csv')
-transactions = pd.read_csv('sample_transaction.csv')
-accounts = pd.read_csv('sample_account.csv')
-devices = pd.read_csv('sample_device.csv')
-auth_logs = pd.read_csv('sample_auth.csv')
+customers = pd.read_csv(basedir + '/sample_customer.csv')
+transactions = pd.read_csv(basedir + '/sample_transaction.csv')
+accounts = pd.read_csv(basedir + '/sample_account.csv')
+devices = pd.read_csv(basedir + '/sample_device.csv')
+auth_logs = pd.read_csv(basedir + '/sample_auth.csv')
 
-def check_source_missing(table, table_name, check_columns):
+def check_source_missing(table, table_name, check_columns, cascading_tables):
     logging.info(f"[Missing Values Check] {table_name}")
     for column in check_columns:
         missing = table[table[column].isnull()]
         if not missing.empty:
             logging.warning(f"Rows with missing {column} in {table_name}:")
             logging.warning(f"\n{missing}")
-        cleaned_table = table.dropna(subset=[column])
+            for cascading_table, foreign_key in cascading_tables:
+                logging.warning(f"Checking cascading table {cascading_table} for missing {foreign_key} related to {table_name}.{column}")
+                related_missing = cascading_table[cascading_table[foreign_key].isin(missing[column])]
+                if not related_missing.empty:
+                    logging.warning(f"Rows in {cascading_table} with missing {foreign_key} related to {table_name}.{column}:")
+                    logging.warning(f"\n{related_missing}")
+                cascading_table.dropna(subset=[foreign_key], inplace=True)
+            table = table.dropna(subset=[column])
         logging.info(f"Cleaned {table_name} by removing rows with missing {column}.")
-    return cleaned_table
+    return table
 
 def check_source_unique(table, check_columns, primary_key='customer_id'):
     logging.info(f"[Uniqueness Check]  {check_columns}")
@@ -116,34 +123,32 @@ def check_foreign_keys(cursor, child_table, child_col, parent_table, parent_col)
 
 def main():
     # Run checks
-    clean_customers = check_source_missing(customers, "Customers", ['national_id', 'first_name', 'last_name'])
-    clean_transactions = check_source_missing(transactions, "Transactions", ['transaction_id', 'amount', 'account_id', 'auth_id'])
-    clean_devices = check_source_missing(devices, "Devices", ['device_id', 'customer_id', 'device_name', 'device_model'])
-    clean_accounts = check_source_missing(accounts, "Accounts", ['account_id', 'customer_id', 'account_number', 'account_open_date'])
-    clean_auth_logs = check_source_missing(auth_logs, "Auth Logs", ['auth_id', 'device_id', 'customer_id', 'auth_method', 'auth_time'])
+    clean_customers = check_source_missing(customers, "Customers", ['national_id', 'first_name', 'last_name'], [[devices, 'customer_id'], [accounts, 'customer_id'], [auth_logs, 'customer_id']])
+    clean_transactions = check_source_missing(transactions, "Transactions", ['amount', 'account_id', 'auth_id'], [[auth_logs, 'auth_id']])
+    clean_devices = check_source_missing(devices, "Devices", ['customer_id', 'device_name', 'device_model'], [[auth_logs, 'device_id']])
+    clean_accounts = check_source_missing(accounts, "Accounts", ['customer_id', 'account_number', 'account_open_date'],[[transactions, 'account_id']])
+    clean_auth_logs = check_source_missing(auth_logs, "Auth Logs", ['device_id', 'customer_id', 'auth_method', 'auth_time'], [[transactions, 'auth_id']])
     # Check for uniqueness
     clean_customers = check_source_unique(clean_customers, ['national_id', 'phone_number', 'email_address'])
-    clean_transactions = check_source_unique(clean_transactions, ['transaction_id', 'auth_id'], primary_key='transaction_id')
-    clean_devices = check_source_unique(clean_devices, ['device_id', 'customer_id'])
-    clean_accounts = check_source_unique(clean_accounts, [['account_id', 'customer_id']])
-    with open('cleaned__sample_customer.csv', 'w') as f:
+    clean_transactions = check_source_unique(clean_transactions, ['auth_id'], primary_key='transaction_id')
+    with open(basedir + '/cleaned__sample_customer.csv', 'w') as f:
         clean_customers.to_csv(f, index=False)
-    with open('cleaned__sample_transaction.csv', 'w') as f:
+    with open(basedir + '/cleaned__sample_transaction.csv', 'w') as f:
         clean_transactions.to_csv(f, index=False)
-    with open('cleaned__sample_device.csv', 'w') as f:
+    with open(basedir + '/cleaned__sample_device.csv', 'w') as f:
         clean_devices.to_csv(f, index=False)
-    with open('cleaned__sample_account.csv', 'w') as f:
+    with open(basedir + '/cleaned__sample_account.csv', 'w') as f:
         clean_accounts.to_csv(f, index=False)
-    with open('cleaned__sample_auth_log.csv', 'w') as f:
+    with open(basedir + '/cleaned__sample_auth_log.csv', 'w') as f:
         clean_auth_logs.to_csv(f, index=False)
     check_source_national_id_format(customers)
     try:
         connection = psycopg2.connect(
             host="localhost",
-            database="postgres",
-            user="postgres",
-            password="pvdzxc2003",
-            port=5432
+            database="airflow",
+            user="airflow",
+            password="airflow",
+            port=3636
         )
         cursor = connection.cursor()
 

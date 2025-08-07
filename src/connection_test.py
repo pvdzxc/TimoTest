@@ -3,11 +3,11 @@ import psycopg2
 
 try:
     connection = psycopg2.connect(
-        host="localhost",
-        database="postgres",
-        user="postgres",
-        password="pvdzxc2003",
-        port=5432
+        host="postgres",
+        database="airflow",
+        user="airflow",
+        password="airflow",
+        port=3636
     )
     cursor = connection.cursor()
 

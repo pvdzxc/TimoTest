@@ -3,7 +3,7 @@ import logging
 
 # Set up logging
 logging.basicConfig(
-    filename='/home/TimoTest/logs/risk_audit_log.txt',
+    filename='/opt/airflow/logs/risk_audit_log.txt',
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
@@ -15,10 +15,10 @@ def main():
     try:
         connection = psycopg2.connect(
             host="localhost",
-            database="postgres",
-            user="postgres",
-            password="pvdzxc2003",
-            port=5432
+            database="airflow",
+            user="airflow",
+            password="airflow",
+            port=3636
         )
         cursor = connection.cursor()
 
