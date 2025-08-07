@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 customer_id,first_name,last_name,phone_number,username,email_address,national_id,dob,address
 1,Mikayla,Lopez,0492246315,mikayla.lopez66,mikayla.lopez66@yahoo.com,424294481099,1991-02-14,"1026 Christopher Light Suite 174 Port Joshuaborough, PA 69881"
 2,Nathan,Scott,0310417455,nathan.scott41,nathan.scott41@hotmail.com,362349438000,1974-09-15,"1365 Ashley Orchard Apt. 438 Josephstad, NH 99246"
@@ -99,3 +100,26 @@ customer_id,first_name,last_name,phone_number,username,email_address,national_id
 98,Juan,Nichols,0103928331,juan.nichols39,juan.nichols39@hotmail.com,040179939984,1994-03-22,"9269 Nichole Shore Mariashire, RI 36154"
 99,Pam,Lopez,0710045815,pam.lopez20,pam.lopez20@hotmail.com,377010411573,1985-01-30,"46297 Beck Inlet Suite 289 Brendaburgh, RI 47443"
 100,William,Barnes,0724797552,william.barnes1,william.barnes1@yahoo.com,928995972402,1990-02-19,"4464 Porter Fork Suite 112 Williamsberg, LA 57050"
+=======
+customer_id,first_name,last_name,phone_number,username,email_address,national_id,dob,address
+1,Melissa,Young,0046236139,melissa.young36,melissa.young36@gmail.com,985987914197,1987-05-28,"4515 Osborne Neck
+South Kirk, MT 09320"
+2,Shelley,Lynch,0786460466,shelley.lynch2,shelley.lynch2@yahoo.com,226620774950,1969-11-05,"00311 Jacobs Shore Apt. 316
+Murrayberg, PA 38215"
+3,Brett,Washington,0263222767,brett.washington86,brett.washington86@gmail.com,445103935652,1981-06-16,"1252 Holly Hollow Suite 326
+East Katherine, IN 54413"
+4,Timothy,Schmidt,0261011803,timothy.schmidt86,timothy.schmidt86@hotmail.com,040682027784,2003-01-02,"193 Jessica Extension
+Perkinsville, GU 77591"
+5,Tonya,Hernandez,0836780708,tonya.hernandez66,tonya.hernandez66@gmail.com,678399887332,1967-02-20,"4690 Harris Route
+North Brianburgh, OK 81791"
+6,Christopher,Smith,0469584980,christopher.smith51,christopher.smith51@yahoo.com,000953403749,2006-07-17,"365 Richardson Parks
+Andrewfort, NC 47002"
+7,Lauren,Casey,0494604594,lauren.casey18,lauren.casey18@gmail.com,638588686169,1988-08-19,"26289 Brandy Court
+Jessicashire, OR 71205"
+8,Deanna,Richardson,0031030953,deanna.richardson68,deanna.richardson68@hotmail.com,145754572221,1965-06-09,"738 Hanson Alley Apt. 563
+East Christina, OH 32388"
+9,Marissa,Ramirez,0863807507,marissa.ramirez82,marissa.ramirez82@gmail.com,873594967436,1993-12-11,"714 Rebecca Divide
+West Matthewport, SC 17292"
+10,Eric,Warner,0368980421,eric.warner27,eric.warner27@yahoo.com,388417862761,1980-10-01,"5434 Weeks Summit
+Hayesberg, WA 77427"
+>>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed

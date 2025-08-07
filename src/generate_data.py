@@ -12,10 +12,17 @@ max_transaction_id = 0
 max_auth_id = 0
 try:
     connection = psycopg2.connect(
+<<<<<<< HEAD
         host="postgres",
         database="airflow",
         user="airflow",
         password="airflow",
+=======
+        host="localhost",
+        database="postgres",
+        user="postgres",
+        password="123456789",
+>>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         port=5432
     )
     cursor = connection.cursor()
@@ -222,11 +229,16 @@ if __name__ == "__main__":
     
     txns,auth = create_transactions(existing_accounts, existing_devices,customers, max_transaction_id, max_auth_id)
 
+<<<<<<< HEAD
     with open('/opt/airflow/data/sample_customer.csv', 'w') as f:
+=======
+    with open('/home/timobank/TimoTest/data/sample_customer.csv', 'w') as f:
+>>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         writer = csv.DictWriter(f, fieldnames=customers[0].keys())
         writer.writeheader()
         writer.writerows(customers)
 
+<<<<<<< HEAD
     with open('/opt/airflow/data/sample_transaction.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=txns[0].keys())
         writer.writeheader()
@@ -240,6 +252,21 @@ if __name__ == "__main__":
         writer.writeheader()
         writer.writerows(accounts)
     with open('/opt/airflow/data/sample_auth.csv', 'w') as f:
+=======
+    with open('/home/timobank/TimoTest/data/sample_transaction.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=txns[0].keys())
+        writer.writeheader()
+        writer.writerows(txns)
+    with open('/home/timobank/TimoTest/data/sample_device.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=devices[0].keys())
+        writer.writeheader()
+        writer.writerows(devices)
+    with open('/home/timobank/TimoTest/data/sample_account.csv', 'w') as f:
+        writer = csv.DictWriter(f, fieldnames=accounts[0].keys())
+        writer.writeheader()
+        writer.writerows(accounts)
+    with open('/home/timobank/TimoTest/data/sample_auth.csv', 'w') as f:
+>>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         writer = csv.DictWriter(f, fieldnames=auth[0].keys())
         writer.writeheader()
         writer.writerows(auth)

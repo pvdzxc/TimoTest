@@ -4,10 +4,17 @@ import psycopg2
 try:
     connection = psycopg2.connect(
         host="localhost",
+<<<<<<< HEAD
         database="airflow",
         user="airflow",
         password="airflow",
         port=3636
+=======
+        database="postgres",
+        user="postgres",
+        password="123456789",
+        port=5432
+>>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
     )
     cursor = connection.cursor()
 
