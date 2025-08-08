@@ -80,9 +80,9 @@ def main():
                 logging.warning(
                     f"Risk detected customer {customer_id} had total transactions {total_amount} VND on {txn_date} without any strong authentication method."
                 )
-            # Set the risk_tag field to 'weak_authentication'
+            # Set the risk_tag field to 'potential_risk'
             cursor.execute(
-                f"UPDATE Customer SET risk_tag = 'weak_authentication' WHERE customer_id = '{customer_id}'"
+                f"UPDATE Customer SET risk_tag = 'potential_risk' WHERE customer_id = '{customer_id}'"
             )
         cursor.close()
         connection.close()
