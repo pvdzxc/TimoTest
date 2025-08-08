@@ -5,30 +5,18 @@ import re
 # Set up logging
 import logging
 logging.basicConfig(
-<<<<<<< HEAD
     filename='/opt/airflow/logs/data_quality_log.txt',
-=======
-    filename='/home/timobank/TimoTest/logs/data_quality_log.txt',
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
     filemode='w',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s: %(message)s'
 )
 basedir = '/opt/airflow/data'
 # Load data sources
-<<<<<<< HEAD
 customers = pd.read_csv(basedir + '/sample_customer.csv')
 transactions = pd.read_csv(basedir + '/sample_transaction.csv')
 accounts = pd.read_csv(basedir + '/sample_account.csv')
 devices = pd.read_csv(basedir + '/sample_device.csv')
 auth_logs = pd.read_csv(basedir + '/sample_auth.csv')
-=======
-customers = pd.read_csv('/home/timobank/TimoTest/data/sample_customer.csv')
-transactions = pd.read_csv('/home/timobank/TimoTest/data/sample_transaction.csv')
-accounts = pd.read_csv('/home/timobank/TimoTest/data/sample_account.csv')
-devices = pd.read_csv('/home/timobank/TimoTest/data/sample_device.csv')
-auth_logs = pd.read_csv('/home/timobank/TimoTest/data/sample_auth.csv')
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
 
 def check_source_missing(table, table_name, check_columns, cascading_tables):
     logging.info(f"[Missing Values Check] {table_name}")
@@ -142,7 +130,6 @@ def main():
     clean_auth_logs = check_source_missing(auth_logs, "Auth Logs", ['device_id', 'customer_id', 'auth_method', 'auth_time'], [[transactions, 'auth_id']])
     # Check for uniqueness
     clean_customers = check_source_unique(clean_customers, ['national_id', 'phone_number', 'email_address'])
-<<<<<<< HEAD
     clean_transactions = check_source_unique(clean_transactions, ['auth_id'], primary_key='transaction_id')
     with open(basedir + '/cleaned__sample_customer.csv', 'w') as f:
         clean_customers.to_csv(f, index=False)
@@ -153,36 +140,15 @@ def main():
     with open(basedir + '/cleaned__sample_account.csv', 'w') as f:
         clean_accounts.to_csv(f, index=False)
     with open(basedir + '/cleaned__sample_auth_log.csv', 'w') as f:
-=======
-    clean_transactions = check_source_unique(clean_transactions, ['transaction_id', 'auth_id'], primary_key='transaction_id')
-    clean_devices = check_source_unique(clean_devices, ['device_id', 'customer_id'])
-    clean_accounts = check_source_unique(clean_accounts, [['account_id', 'customer_id']])
-    with open('/home/timobank/TimoTest/data/cleaned__sample_customer.csv', 'w') as f:
-        clean_customers.to_csv(f, index=False)
-    with open('/home/timobank/TimoTest/data/cleaned__sample_transaction.csv', 'w') as f:
-        clean_transactions.to_csv(f, index=False)
-    with open('/home/timobank/TimoTest/data/cleaned__sample_device.csv', 'w') as f:
-        clean_devices.to_csv(f, index=False)
-    with open('/home/timobank/TimoTest/data/cleaned__sample_account.csv', 'w') as f:
-        clean_accounts.to_csv(f, index=False)
-    with open('/home/timobank/TimoTest/data/cleaned__sample_auth_log.csv', 'w') as f:
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         clean_auth_logs.to_csv(f, index=False)
     check_source_national_id_format(customers)
     try:
         connection = psycopg2.connect(
             host="localhost",
-<<<<<<< HEAD
             database="airflow",
             user="airflow",
             password="airflow",
             port=3636
-=======
-            database="postgres",
-            user="postgres",
-            password="123456789",
-            port=5432
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         )
         cursor = connection.cursor()
 

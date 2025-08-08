@@ -12,17 +12,10 @@ max_transaction_id = 0
 max_auth_id = 0
 try:
     connection = psycopg2.connect(
-<<<<<<< HEAD
         host="postgres",
         database="airflow",
         user="airflow",
         password="airflow",
-=======
-        host="localhost",
-        database="postgres",
-        user="postgres",
-        password="123456789",
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         port=5432
     )
     cursor = connection.cursor()
@@ -98,7 +91,7 @@ def create_accounts(customers, max_account_id):
     # Generate account data for each customer
     accounts = []
     for customer in customers:
-        for i in range(1, random.randint(1, 3)):  # Each customer can have 0-2 accounts
+        for i in range(0, random.randint(1, 3)):  # Each customer can have 1-3 accounts
             customer_id = customer['customer_id']
             max_account_id = max_account_id + 1
             accounts.append({
@@ -170,8 +163,11 @@ def create_transactions(accounts, devices, customers, max_transaction_id, max_au
         acc = random.choice(accounts)
         if acc[2] != 'Active':
             continue
-        customer = random.choice([c for c in customers if c['customer_id'] == acc[1]])
-        dev = random.choice([d for d in devices if d[1] == customer['customer_id']])
+        for cus in customers:
+            if cus[0] == acc[1]:
+                customer = cus
+                break
+        dev = random.choice([d for d in devices if d[1] == customer[0]])
         time = fake.date_time_between(start_date='-3d', end_date='now')
         dtime = round(random.uniform(0.5, 4),2)
         txns.append({
@@ -185,7 +181,7 @@ def create_transactions(accounts, devices, customers, max_transaction_id, max_au
         auth.append({
             'auth_id': max_auth_id,
             'device_id': dev[0],
-            'customer_id': customer['customer_id'],
+            'customer_id': customer[0],
             'auth_method': random.choice(['OTP', 'Biometric', 'Password', 'PIN']),
             'auth_time': time + timedelta(dtime),
         })
@@ -206,6 +202,13 @@ if __name__ == "__main__":
         )
         cursor = connection.cursor()
         cursor.execute("SET SCHEMA 'public';")
+        cursor.execute("SELECT customer_id, first_name, last_name FROM Customer;")
+        existing_customers = cursor.fetchall()
+        existing_customers = [[cust[0], cust[1], cust[2]] for cust in existing_customers]
+        if existing_customers:
+            print(f"Found {len(existing_customers)} existing customers in the database.")
+        new_customers = [[cust['customer_id'], cust['first_name'], cust['last_name']] for cust in customers]
+        existing_customers = existing_customers + new_customers
         cursor.execute("SELECT account_id, customer_id, account_status FROM BankAccount;")
         existing_accounts = cursor.fetchall()
         existing_accounts = [[acc[0], acc[1], acc[2]] for acc in existing_accounts]
@@ -227,18 +230,13 @@ if __name__ == "__main__":
     except Exception as error:
         print("Error while retrieving existing accounts and devices:", error)
     
-    txns,auth = create_transactions(existing_accounts, existing_devices,customers, max_transaction_id, max_auth_id)
+    txns,auth = create_transactions(existing_accounts, existing_devices, existing_customers, max_transaction_id, max_auth_id)
 
-<<<<<<< HEAD
     with open('/opt/airflow/data/sample_customer.csv', 'w') as f:
-=======
-    with open('/home/timobank/TimoTest/data/sample_customer.csv', 'w') as f:
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         writer = csv.DictWriter(f, fieldnames=customers[0].keys())
         writer.writeheader()
         writer.writerows(customers)
 
-<<<<<<< HEAD
     with open('/opt/airflow/data/sample_transaction.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=txns[0].keys())
         writer.writeheader()
@@ -252,21 +250,6 @@ if __name__ == "__main__":
         writer.writeheader()
         writer.writerows(accounts)
     with open('/opt/airflow/data/sample_auth.csv', 'w') as f:
-=======
-    with open('/home/timobank/TimoTest/data/sample_transaction.csv', 'w') as f:
-        writer = csv.DictWriter(f, fieldnames=txns[0].keys())
-        writer.writeheader()
-        writer.writerows(txns)
-    with open('/home/timobank/TimoTest/data/sample_device.csv', 'w') as f:
-        writer = csv.DictWriter(f, fieldnames=devices[0].keys())
-        writer.writeheader()
-        writer.writerows(devices)
-    with open('/home/timobank/TimoTest/data/sample_account.csv', 'w') as f:
-        writer = csv.DictWriter(f, fieldnames=accounts[0].keys())
-        writer.writeheader()
-        writer.writerows(accounts)
-    with open('/home/timobank/TimoTest/data/sample_auth.csv', 'w') as f:
->>>>>>> a871091e71e674c1dabafd8277490e72dc4aa4ed
         writer = csv.DictWriter(f, fieldnames=auth[0].keys())
         writer.writeheader()
         writer.writerows(auth)
