@@ -32,17 +32,22 @@ To run the daily data pipeline:
 2. Go to the "DAGs" tab
 3. Select 'daily-data-pipeline'
 4. Click "Trigger DAG"
+   * The DAG are automatically executed daily
 
 🐘 pgAdmin (PostgreSQL UI)
 - URL: http://localhost:80
 - Username: admin@example.com
 - Password: admin
 
+Check the data storing after each DAG trigger by select schema of: customer, tabtransaction, bankaccount, device, authenticationlog
+
 📦 PostgreSQL Database Connection
 - Host: postgres
 - Database: airflow
 - Username: airflow
 - Password: airflow
+
+Progress to PostgreSQL database by using pgAdmin "add connection" with above information
 
 ---------------------
 Project Structure
@@ -76,7 +81,19 @@ project-root/
 - Docker Compose
 
 --------------------------
-📬 Support
+ Scripts Utility
 --------------------------
 
-For questions or issues, feel free to reach out to the project maintainer.
+The Data is created by the generate_data.py, virtualizing data daily stream of banking activity,
+
+After the first stage of data quality checking by data_quality_standards.py, the data is inserted to SQL schemas through data_populating.py,
+
+Then, the second stage of data quality checking is performed by the same python script, 
+
+Finally monitoring_audit.py script will check any fraud/risk data insight and alert via logging or database risk tagging.
+
+--------------------------
+ Support
+--------------------------
+
+For questions or issues, feel free to reach out to the project maintainer via pvdzxc@gmail.com.
