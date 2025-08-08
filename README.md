@@ -1,14 +1,14 @@
 ==============================
-💼 Banking Data Assignment
+ Banking Data Assignment
 ==============================
 
 Project Overview
 ----------------
 This project sets up a secure and compliant data platform for a simplified banking system.
-It uses Docker to orchestrate PostgreSQL and Apache Airflow for data pipeline execution.
+It uses Docker to orchestrate, PostgreSQL as database engine and Apache Airflow for data pipeline execution.
 
 ----------------
-🚀 Getting Started
+ One-Command setup
 ----------------
 
 1. Open a terminal in the project root directory.
@@ -19,10 +19,10 @@ It uses Docker to orchestrate PostgreSQL and Apache Airflow for data pipeline ex
 This will start all required services using Docker Compose.
 
 ----------------
-🔗 Service Access
+ Service Access
 ----------------
 
-🌬️ Apache Airflow
+🌬 Apache Airflow
 - URL: http://localhost:8080
 - Username: airflow
 - Password: airflow
@@ -45,15 +45,17 @@ To run the daily data pipeline:
 - Password: airflow
 
 ---------------------
-🧱 Project Structure
+Project Structure
 ---------------------
 
 project-root/
 │
 ├── docker-compose.yaml         # Defines services (Airflow, PostgreSQL, pgAdmin)
 ├── dags/                       # Airflow DAGs (pipelines)
-├── sql/                        # SQL scripts for schema and sample data
-├── logs/                       # Airflow logs
+├── data/                       # Data source folder 
+├── logs/                       # DAG processor, data quality, risk audit logging
+├── sql/                        # SQL scripts for SQL schema/table
+├── src(scripts)/               # Python executing file, python library requirement 
 └── README.txt                  # This file
 
 --------------------------
