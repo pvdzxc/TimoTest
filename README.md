@@ -1,6 +1,6 @@
-==============================
+--------------------------
  Banking Data Assignment
-==============================
+--------------------------
 
 Project Overview
 ----------------
@@ -59,14 +59,13 @@ project-root/
 └── README.txt                  # This file
 
 --------------------------
-🛠️ Technologies Used
+ Technologies Used
 --------------------------
 
-- Python 3
+- Python 3.11
 - Apache Airflow
 - PostgreSQL
-- pgAdmin
-- Docker & Docker Compose
+- Docker Compose
 
 --------------------------
 📬 Support
