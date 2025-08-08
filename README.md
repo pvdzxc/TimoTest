@@ -49,13 +49,21 @@ Project Structure
 ---------------------
 
 project-root/
+
 │
+
 ├── docker-compose.yaml         # Defines services (Airflow, PostgreSQL, pgAdmin)
+
 ├── dags/                       # Airflow DAGs (pipelines)
+
 ├── data/                       # Data source folder 
+
 ├── logs/                       # DAG processor, data quality, risk audit logging
+
 ├── sql/                        # SQL scripts for SQL schema/table
+
 ├── src(scripts)/               # Python executing file, python library requirement 
+
 └── README.txt                  # This file
 
 --------------------------
